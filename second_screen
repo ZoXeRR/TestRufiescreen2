@@ -1,0 +1,59 @@
+from PyQt5.QtCore import Qt, QTime, QTimer
+from instr import *
+from PyQt5.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QPushButton, QApplication, QWidget, QLineEdit 
+from my_app import *
+from final_win import *
+class TestWin(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.set_appear()
+        self.initUI()
+        self.connects()
+        self.show()
+    def set_appear(self):
+        self.setWindowTitle(txt_title)
+        self.resize(win_width, win_height)
+        self.move(win_x, win_y)
+    def initUI(self):
+        self.h_line = QHBoxLayout()
+        self.r_line = QVBoxLayout()
+        self.l_line = QVBoxLayout()
+        self.fio = QLineEdit(txt_hintname)
+        self.age = QLineEdit(txt_hintage)
+        self.firstres = QLineEdit(txt_test1)
+        self.scndres = QLineEdit(txt_test2)
+        self.finalres = QLineEdit(txt_test3)
+        self.fiotxt = QLabel(txt_name)
+        self.agetxt = QLabel(txt_age)
+        self.time = QTime(0,0,15)
+        self.timer = QTimer()
+        self.hinttest1 = QLabel(txt_hinttest1)
+        self.hinttest2 = QLabel(txt_hinttest2)
+        self.hinttest3 = QLabel(txt_hinttest3)
+        self.starttest1 = QPushButton(txt_starttest1)
+        self.starttest2 = QPushButton(txt_starttest2)
+        self.starttest3 = QPushButton(txt_starttest3)
+        self.finbtn = QPushButton(txt_sendresults)
+        self.r_line.addWidget(self.timer, alignment= Qt.AlignRight)
+        self.l_line.addWidget(self.fio, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.age, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.firstres, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.scndres, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.finalres, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.fiotxt, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.agetxt, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.hinttest1, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.hinttest2, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.hinttest3, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.starttest1, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.starttest2, alignment = Qt.AlignLeft)
+        self.l_line.addWidget(self.starttest3, alignment = Qt.AlignLeft)
+        self.h_line.addLayout(self.l_line)
+        self.h_line.addLayout(self.r_line)
+        self.setLayout(self.h_line)
+    def connects(self):
+        self.finbtn.clicked.connect(self.next_click)
+    def next_click(self):
+        self.hide()
+        self.fw = FinalWin()    
+    
